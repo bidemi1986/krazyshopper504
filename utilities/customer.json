@@ -1,0 +1,213 @@
+{
+	"res": {
+		"data": {
+			"accounts": [
+				{
+					"connected": false,
+					"id": "626ebea71bdb293b08d12180",
+					"manual": false,
+					"name": "Robin Patterson",
+					"nuban": "797275202",
+					"type": "Investment"
+				},
+				{
+					"connected": true,
+					"id": "626ebea71bdb293b08d121a9",
+					"manual": false,
+					"name": "Robin Patterson",
+					"nuban": "797274421",
+					"type": "Savings"
+				},
+				{
+					"connected": false,
+					"id": "626ebea71bdb293b08d121be",
+					"manual": false,
+					"name": "Robin Patterson",
+					"nuban": "797275826",
+					"type": "Current"
+				},
+				{
+					"connected": false,
+					"id": "626ebea71bdb293b08d121d6",
+					"manual": false,
+					"name": "Robin Patterson",
+					"nuban": "797270893",
+					"type": "Investment"
+				}
+			],
+			"auth": {
+				"bank_details": {
+					"_id": "5d6fe57a4099cc4b210bbebf",
+					"icon": "https://okra-images.s3.eu-west-3.amazonaws.com/Providus+Bank+Icon.svg",
+					"logo": "https://okra-images.s3.eu-west-3.amazonaws.com/Providus+Bank+Icon.svg",
+					"name": "Providus Bank",
+					"png_logo": "http://d1f1tz87xvarxp.cloudfront.net/Nigerian+Banks/Providus+Bank.png",
+					"slug": "providus-bank",
+					"v2_icon": "https://okra-images.s3.eu-west-3.amazonaws.com/Providus+Bank+Icon.svg",
+					"v2_logo": "https://okra-images.s3.eu-west-3.amazonaws.com/Providus+Bank+Icon.svg"
+				},
+				"bank_id": "5d6fe57a4099cc4b210bbebf",
+				"clientId": "okr-1651424834706-z4_E_2L9Eqd-KMMDJh4f4",
+				"customer_id": "624b83aff9e197017961d978",
+				"login_type": "mobile",
+				"status": true,
+				"type": "validate"
+			},
+			"authorizationId": null,
+			"authorization_id": null,
+			"balance": {
+				"data": {
+					"formatted": [
+						{
+							"account": "626ebea71bdb293b08d12180",
+							"available_balance": 10148598,
+							"currency": "NGN",
+							"ledger_balance": 10148598,
+							"name": "Robin Patterson",
+							"nuban": "797275202",
+							"ref": "investment-account",
+							"status": "active",
+							"type": "Investment"
+						},
+						{
+							"account": "626ebea71bdb293b08d121a9",
+							"available_balance": 10118848,
+							"currency": "NGN",
+							"ledger_balance": 10118848,
+							"name": "Robin Patterson",
+							"nuban": "797274421",
+							"ref": "saving-account",
+							"status": "active",
+							"type": "Savings"
+						},
+						{
+							"account": "626ebea71bdb293b08d121be",
+							"available_balance": 10066793,
+							"currency": "NGN",
+							"ledger_balance": 10066793,
+							"name": "Robin Patterson",
+							"nuban": "797275826",
+							"ref": "current-account",
+							"status": "active",
+							"type": "Current"
+						},
+						{
+							"account": "626ebea71bdb293b08d121d6",
+							"available_balance": 10196841,
+							"currency": "NGN",
+							"ledger_balance": 10196841,
+							"name": "Robin Patterson",
+							"nuban": "797270893",
+							"ref": "investment-account",
+							"status": "active",
+							"type": "Investment"
+						}
+					]
+				},
+				"formatted": [
+					{
+						"account": "626ebea71bdb293b08d12180",
+						"available_balance": 10148598,
+						"currency": "NGN",
+						"ledger_balance": 10148598,
+						"name": "Robin Patterson",
+						"nuban": "797275202",
+						"ref": "investment-account",
+						"status": "active",
+						"type": "Investment"
+					},
+					{
+						"account": "626ebea71bdb293b08d121a9",
+						"available_balance": 10118848,
+						"currency": "NGN",
+						"ledger_balance": 10118848,
+						"name": "Robin Patterson",
+						"nuban": "797274421",
+						"ref": "saving-account",
+						"status": "active",
+						"type": "Savings"
+					},
+					{
+						"account": "626ebea71bdb293b08d121be",
+						"available_balance": 10066793,
+						"currency": "NGN",
+						"ledger_balance": 10066793,
+						"name": "Robin Patterson",
+						"nuban": "797275826",
+						"ref": "current-account",
+						"status": "active",
+						"type": "Current"
+					},
+					{
+						"account": "626ebea71bdb293b08d121d6",
+						"available_balance": 10196841,
+						"currency": "NGN",
+						"ledger_balance": 10196841,
+						"name": "Robin Patterson",
+						"nuban": "797270893",
+						"ref": "investment-account",
+						"status": "active",
+						"type": "Investment"
+					}
+				]
+			},
+			"bank_id": "5d6fe57a4099cc4b210bbebf",
+			"callback_url": "null",
+			"customer_id": "624b83aff9e197017961d978",
+			"done": true,
+			"error": null,
+			"hideExit": false,
+			"identity": {
+				"address": ["3450 Prof., Sunday Bing Dale, Bursari Bauchi"],
+				"aliases": ["Grace  Annabelle Evans", "Joy Bing"],
+				"bvn": "7972742413",
+				"created_at": "2022-05-01T17:08:53.681Z",
+				"customer": "624b83aff9e197017961d978",
+				"dob": "2021-10-03T19:12:29+00:00",
+				"email": ["Georgiana_Daniel@hotmail.com", "Mikel_Dickens@gmail.com"],
+				"env": "production-sandbox",
+				"firstname": "Robin",
+				"fullname": "Robin Ralph Patterson",
+				"gender": "F",
+				"id": "626ebea5c126ca001d3691b9",
+				"last_updated": "2022-05-01T17:08:53.681Z",
+				"lastname": "Patterson",
+				"lga_of_origin": "Ndokwa East",
+				"lga_of_residenc": "Lagos Island",
+				"marital_status": "Single",
+				"middlename": "Ralph",
+				"nationality": "Nigeria",
+				"nin": "9336818674",
+				"phone": ["02116511329", "08563814674"],
+				"photo_id": [
+					{
+						"_id": "624b83aff9e197017961d97d",
+						"image_type": "ID",
+						"url": "https://okra-profile-pictures.s3.eu-west-3.amazonaws.com/identities/sannboxFace.png"
+					}
+				],
+				"projects": ["620cd384ce038bc8a429f4ba"],
+				"score": 100,
+				"state_of_origin": "Delta State",
+				"state_of_residence": "Lagos State",
+				"status": "true",
+				"verification_country": "NG",
+				"verified": true
+			},
+			"income": null,
+			"launchAgain": false,
+			"options": null,
+			"payment_authorization": null,
+			"record": "626ebe43c126ca001d3691ab",
+			"record_id": "626ebe43c126ca001d3691ab",
+			"success": true,
+			"transactions": {
+				"transactions": {
+					"callback_url": "https://api.okra.ng/v2/callback?record=626ebe43c126ca001d3691ab&method=TRANSACTIONS"
+				}
+			}
+		},
+		"event": "option success"
+	},
+	"status": "options success"
+}

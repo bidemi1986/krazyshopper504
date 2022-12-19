@@ -1,0 +1,43 @@
+{
+	"_id": "627107261bdb293b0835ae29",
+	"bank": "5d6fe57a4099cc4b210bbeb0",
+	"cleared_date": "2022-05-02T19:40:31.025Z",
+	"credit": null,
+	"customer": "62710720731da1001dd232af",
+	"debit": 42464,
+	"notes": {
+		"desc": "Qui voluptatum et ut vel atque et.",
+		"topics": ["b"],
+		"places": ["b"],
+		"people": ["a"],
+		"actions": ["c"],
+		"subjects": ["a"],
+		"prepositions": ["c"]
+	},
+	"ref": null,
+	"trans_date": "2022-05-02T23:10:59.107Z",
+	"account": "6139db2525038a6e175d7bb1",
+	"balance": null,
+	"branch": "MPNOMES1",
+	"code": "t",
+	"created_at": "2022-05-03T10:42:46.353Z",
+	"currency": null,
+	"env": "production-sandbox",
+	"last_updated": "2022-05-03T10:42:56.399Z",
+	"location": {
+		"address": "3937 Dr., Faith Agusto Ferry, Mashi Delta",
+		"lat": 4.249898,
+		"long": 5.048956,
+		"raw": "Abiodun Motors"
+	},
+	"ner": {
+		"beneficiaries": "Edith Prosper",
+		"account": ["5659410539"]
+	},
+	"owner": ["620cd384dc3b7f00415eee7c"],
+	"record": ["62710711731da1001dd232a5"],
+	"unformatted_cleared_date": "02-05-2022",
+	"unformatted_trans_date": "02-05-2022",
+	"projects": ["620cd384ce038bc8a429f4ba"],
+	"fetched": ["620cd384dc3b7f00415eee7c"]
+}
