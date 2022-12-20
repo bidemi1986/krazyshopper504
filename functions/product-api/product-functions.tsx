@@ -33,7 +33,7 @@ export const fetch_all_products = async () => {
       querySnapshot.forEach((doc) => {
         data = [...data, { id: doc.id, ...doc.data() }];
       });
-      resolve({ data, msg: "SUCCESS" });
+      resolve({ data: data.sort((a,b)=>{ return b.createdAt -a.createdAt}), msg: "SUCCESS" });
     } catch (err) {
       console.log(err);
       reject({ status: "ERROR", msg: "unable to signup" });
@@ -142,10 +142,7 @@ export const createProduct = async (product: Object) => {
   console.log("product received is ", product);
   return new Promise(async (resolve, reject) => {
     const user = FBauth.currentUser.uid;
-    console.log("user.uid is ", user);
-    /* const user = await Promise.all([ 
-        getUserDetails(uid),
-      ]); */
+    console.log("user.uid is ", user); 
     if (!user) {
       return reject(
         new Error("cannot authenticate the user, pls try again later!")
@@ -159,7 +156,8 @@ export const createProduct = async (product: Object) => {
       !product?.description ||
       !product?.price ||
       !product?.category ||
-      !product?.productImage
+      !product?.productImage ||
+      !product?.amount
     ) {
       return reject(new Error("Incomplete product details..."));
     }
@@ -176,6 +174,7 @@ export const createProduct = async (product: Object) => {
           product: product.category,
           image: doc?.imgUrl || "",
           author_uid: global.userID,
+          amount:product?.amount || 1,
           createdAt: serverTimestamp(),
         })
           .then(() => resolve({ msg: "SUCCESS" }))
@@ -188,6 +187,45 @@ export const createProduct = async (product: Object) => {
         console.log(err);
         reject({ msg: "ERROR", err: err });
       });
+  });
+};
+
+
+export const buyProduct = async (id: string) => {
+  console.log("product received is ", id);
+  return new Promise(async (resolve, reject) => {
+    const user = FBauth.currentUser.uid;
+    console.log("user.uid is ", user); 
+    if (!user) {
+      return reject(
+        new Error("cannot authenticate the user, pls try again later!")
+      );
+    }
+    if (!id) {
+      return reject(
+        new Error("cannot product id, pls try again later!")
+      );
+    }
+    try {
+      const docRef = doc(FBdb, "Products", id);
+      const docSnap = await getDoc(docRef);
+      console.log("Document data:", docSnap.data());
+      let data :any = docSnap.data();
+      let cart = data?.cart || [];
+      if (data?.amount > 0) { 
+        updateDoc(docRef, {
+          amount: data.amount - 1,
+        }).then(() => {
+          resolve({ msg:"SUCCESS", data });
+        });
+      } else { 
+          resolve({ msg:"OUT OF STOCK",  data }); 
+      }
+    } catch (err) {
+      console.log(err);
+      reject({ status: "ERROR", msg: "unable to buy product!" });
+    }
+    
   });
 };
 
@@ -210,31 +248,4 @@ export const getMyProducts = (uid: string) => {
       reject({ err });
     }
   });
-};
-
-export const calculateRatingScore = (ratings) => {
-  if (!Array.isArray(ratings)) return;
-  if (ratings.length == 0) return 0;
-  let five = 0;
-  let four = 0;
-  let three = 0;
-  let two = 0;
-  let one = 0;
-  let baseTotal = 0;
-  ratings.forEach((rating) => {
-    if (rating.rating == 5) {
-      five += 1;
-    } else if (rating.rating == 4) {
-      four += 1;
-    } else if (rating.rating == 3) {
-      three += 1;
-    } else if (rating.rating == 2) {
-      two += 1;
-    } else if (rating.rating == 1) {
-      one += 1;
-    }
-  });
-  baseTotal =
-    five + four + three + two + one == 0 ? 1 : five + four + three + two + one;
-  return (5 * five + 4 * four + 3 * three + 2 * two + 1 * one) / baseTotal;
 };
