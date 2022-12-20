@@ -55,7 +55,7 @@ export const BottomTabNavigator =()=> {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Favorites', 
+          title: 'Cart', 
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
         }}
       />
