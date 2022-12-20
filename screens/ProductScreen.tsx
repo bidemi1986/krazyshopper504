@@ -97,7 +97,7 @@ export default function ProductScreen({ navigation, route }) {
            {route.params?.amount || 0}  <Text style={{opacity:0.4, color: "#333"}}>{product?.amount == 0? "out of stock":"in Stock"}</Text>
           </Text>
           <Text style={[tailwind`text-lg text-left font-bold overflow-hidden`]}>
-            {product?.price || ""}
+            ${product?.price || ""}
           </Text>
           <TouchableOpacity
           disabled={indicator}

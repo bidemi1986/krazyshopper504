@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { StyleSheet } from "react-native";
 import { fetch_all_products } from "../functions/product-api/product-functions";
 import tailwind from "twrnc";
@@ -22,6 +23,13 @@ export default function TabTwoScreen({
 }: RootTabScreenProps<"TabOne">) {
   const { state, dispatch } = useContext(Context);
   const [products, setProducts] = useState([]);
+
+  const getTotalProductPrice = (products) => {
+    return products
+      .map((item) => Number(item.price))
+      .reduce((acc, curr) => acc + curr, 0);
+  };
+
   const [refreshing, setRefreshing] = useState(true);
   const onRefresh = useCallback(async () => {
     //fetchProducts();
@@ -55,7 +63,7 @@ export default function TabTwoScreen({
             minHeight: SCREEN_HEIGHT,
           },
         ]}
-      > 
+      >
         <View
           style={[
             tailwind`w-full bg-[${theme.colors.lightbrown2}] flex-wrap flex-row p-2 flex flex-row items-center justify-around`,
@@ -73,6 +81,22 @@ export default function TabTwoScreen({
               />
             );
           })}
+
+
+          {!isEmpty(products) && (
+            <Text
+              style={[
+                tailwind`w-full bg-[${theme.colors.lightbrown2}] flex-wrap flex-row p-2 flex flex-row items-center justify-around text-xl pt-8`,
+                { paddingBottom: 100, minHeight: SCREEN_HEIGHT },
+              ]}
+            >
+              Product Total: ${getTotalProductPrice(products)}
+            </Text>
+          )}
+
+
+
+
         </View>
       </ScrollView>
     </View>

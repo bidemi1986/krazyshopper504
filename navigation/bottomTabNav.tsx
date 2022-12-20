@@ -56,7 +56,7 @@ export const BottomTabNavigator =()=> {
         component={TabTwoScreen}
         options={{
           title: 'Cart', 
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="shopping-cart" color={color} />,
         }}
       />
     </BottomTab.Navigator>
