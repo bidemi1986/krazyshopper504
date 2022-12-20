@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Alert } from "react-native";
-import React,{useContext} from "react";
+import React,{useContext, useEffect, useState, memo} from "react";
 import tailwind from "twrnc";
 import { Context } from "../../context";
 import { useNavigation } from "@react-navigation/native";
@@ -8,8 +8,9 @@ import getCacheKey from "../../utilities/CustomFastImage/retreiveCacheKey";
 import { SCREEN_WIDTH } from "../../utilities/constants";
 import { theme } from "../../theme/core/theme";
 import { update_my_cart } from "../../functions/product-api/product-functions";
-export default function ProductCard({ product, width, height }: any) {
+const ProductCard =({ product, width, height }: any)=> {
   const { state, dispatch } = useContext(Context);
+  const [cart, setCart] = useState([])
   const navigation = useNavigation();
   const updateCart = async () => {
     let res = await  update_my_cart(product.id);
@@ -25,6 +26,9 @@ export default function ProductCard({ product, width, height }: any) {
       );
     }
   };
+  useEffect(()=>{
+    setCart(state.cart)
+  },[state.cart, state.products])
   return (
     <View
       style={[
@@ -52,7 +56,10 @@ export default function ProductCard({ product, width, height }: any) {
       </View>
       <TouchableOpacity style={[tailwind`p-2 border-2 border-[${theme.colors.lightbrown1}]`]}
       onPress={()=>updateCart()}
-      ><Text style={[tailwind`text-center`]}>{state.cart.includes(product.id)?"REMOVE":"ADD TO CART"}</Text></TouchableOpacity>
+      ><Text style={[tailwind`text-center`]}>{cart.includes(product.id)?"REMOVE":"ADD TO CART"}</Text></TouchableOpacity>
     </View>
   );
 }
+
+
+export default memo(ProductCard)
