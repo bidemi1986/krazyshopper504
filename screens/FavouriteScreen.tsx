@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 import { StyleSheet } from "react-native";
-import { fetch_all_products } from "../functions/product-api/product-functions";
+import { fetch_all_products, getTotalProductPrice } from "../functions/product-api/product-functions";
 import tailwind from "twrnc";
 import { useContext } from "react";
 import { Text, View } from "../components/Themed";
@@ -24,11 +24,7 @@ export default function TabTwoScreen({
   const { state, dispatch } = useContext(Context);
   const [products, setProducts] = useState([]);
 
-  const getTotalProductPrice = (products) => {
-    return products
-      .map((item) => Number(item.price))
-      .reduce((acc, curr) => acc + curr, 0);
-  };
+
 
   const [refreshing, setRefreshing] = useState(true);
   const onRefresh = useCallback(async () => {
