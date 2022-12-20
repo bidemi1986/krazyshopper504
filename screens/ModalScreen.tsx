@@ -22,7 +22,7 @@ import {
   Overlay,
   SpeedDial,
 } from "@rneui/themed";
-import { createProduct } from "../functions/product-api/product-functions";
+import { createProduct, fetch_all_products } from "../functions/product-api/product-functions";
 import { getAllMyDetails } from "../functions/user-api/user-funcs";
 import C504Default from "./AuthScreens/style";
 import { Context } from "../context"; 
@@ -58,6 +58,7 @@ export default function ModalScreen({ route, navigation }) {
 	const [productImage, setProductImage] = useState('');
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [amount,  setAmount] = useState(0);
   const [price, setPrice] = useState(0);
   const [category, setSelectedCategory] = useState("");
   const [refreshing, setRefreshing] = useState(false); 
@@ -66,7 +67,7 @@ export default function ModalScreen({ route, navigation }) {
     setPVisible(!pvisible);
   };
   let product = {
-    name, description, price, category, productImage
+    name, description, price, amount, category, productImage
   }
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -157,9 +158,18 @@ export default function ModalScreen({ route, navigation }) {
 			console.log(E);
 		}
 	};
+  const fetchProducts = async () => { 
+    let res: any = await fetch_all_products();
+    console.log("res  => ", res.data); 
+    dispatch({
+      type: "ADD_PRODUCTS",
+      payload: res.data,
+    }); 
+  };
   useEffect(() => {
     //console.log("route.params ", route.params)
     getMyLocalData();
+    fetchMyData();
     return function cleanup() {
       setBio(null);
       setProducts(null);
@@ -179,7 +189,7 @@ export default function ModalScreen({ route, navigation }) {
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
           paddingTop: 20,
-          paddingBottom: 200,
+          paddingBottom: 400, 
         }}
       >
         <View
@@ -414,6 +424,15 @@ export default function ModalScreen({ route, navigation }) {
                   multiline={true}
                   editable={!indicator}
                 />
+                <Text style={{ ...styles.boxLabel }}>Amount in stock</Text>
+                <TextInput
+                  value={amount}
+                  onChangeText={(val) => setAmount(val)}
+                  style={{ ...styles.inputStyle, minHeight: 30 }}
+                  placeholder="Stock amount"
+                  keyboardType='numeric'
+                  editable={!indicator}
+                />
                 <View
                   style={{
                     flexDirection: "row",
@@ -473,9 +492,10 @@ export default function ModalScreen({ route, navigation }) {
                     try {
                       let res = await createProduct(product);
                       if (res.msg == "SUCCESS") {
-                        setIndicator(false);
+                        setIndicator(false); 
                         setTimeout(function () {
                           Alert.alert("Success!");
+                          fetchProducts();
                           ptoggleOverlay(); 
                          // onRefresh();
                         }, 1000);
@@ -506,10 +526,10 @@ export default function ModalScreen({ route, navigation }) {
 							<KeyboardSpacer topSpacing={SCREEN_HEIGHT < 700 ? -0 : -200} />
 						)} */}
           </Overlay>
-          <View style={{ height: 500 }}></View>
+          <View style={{ height: 500, paddingVertical:500 }}></View>
         </View>
       </ScrollView>
-      <View style={{ height: 200 }}></View>
+      <View style={{ height: 300 }}></View>
     </View>
   );
 }
