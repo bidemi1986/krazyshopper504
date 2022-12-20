@@ -41,7 +41,7 @@ export default function TabTwoScreen({
 
   useEffect(() => {
     updateCart()
-  }, [state.cart]);
+  }, [state.cart, state.products]);
   return (
     <View style={[tailwind`w-full flex `, { backgroundColor: "white" }]}>
       <ScrollView
@@ -55,8 +55,7 @@ export default function TabTwoScreen({
             minHeight: SCREEN_HEIGHT,
           },
         ]}
-      >
-        
+      > 
         <View
           style={[
             tailwind`w-full bg-[${theme.colors.lightbrown2}] flex-wrap flex-row p-2 flex flex-row items-center justify-around`,
