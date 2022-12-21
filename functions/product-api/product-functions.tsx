@@ -291,8 +291,7 @@ export const getMyProducts = (uid: string) => {
  */
 export const getTotalProductPrice = (products) => {
   return products
-    .map((item) => Number(item.price))
-    .reduce((acc, curr) => acc + curr, 0);
+    .map((item) => Number(item.price)).reduce((acc, curr) => acc + curr, 0);
 };
 
 

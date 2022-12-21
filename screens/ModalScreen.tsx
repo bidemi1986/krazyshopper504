@@ -25,8 +25,8 @@ import {
 import { createProduct, fetch_all_products } from "../functions/product-api/product-functions";
 import { getAllMyDetails } from "../functions/user-api/user-funcs";
 import C504Default from "./AuthScreens/style";
-import { Context } from "../context"; 
-import ProductCard from "../components/ShopComps/ProductCard"; 
+import { Context } from "../context";
+import ProductCard from "../components/ShopComps/ProductCard";
 import { FontAwesome, Ionicons, EvilIcons } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
 import { CATEGORIES } from "../utilities/Categories";
@@ -55,13 +55,13 @@ export default function ModalScreen({ route, navigation }) {
   const [selectedProductImage, setSelectedProductImage] = useState("");
   const [openProduct, setOpenProduct] = useState(false);
   const [pvisible, setPVisible] = useState(false);
-	const [productImage, setProductImage] = useState('');
+  const [productImage, setProductImage] = useState('');
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [amount,  setAmount] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(0);
   const [category, setSelectedCategory] = useState("");
-  const [refreshing, setRefreshing] = useState(false); 
+  const [refreshing, setRefreshing] = useState(false);
   const ptoggleOverlay = () => {
     setOpenProduct(!openProduct);
     setPVisible(!pvisible);
@@ -85,7 +85,7 @@ export default function ModalScreen({ route, navigation }) {
     if (res.msg === "SUCCESS") {
       console.log("profile data recieved is ", res);
       await SecureSave("FULL_BIO_DATA", JSON.stringify(res.data));
-      setBio(res.data.BIO); 
+      setBio(res.data.BIO);
       setProducts(res.data.PRODUCTS);
     } else {
       Alert.alert(
@@ -142,29 +142,29 @@ export default function ModalScreen({ route, navigation }) {
   };
 
   const _pickImage = async () => {
-		await getPermissionAsync();
-		try {
-			let result = await ImagePicker.launchImageLibraryAsync({
-				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				allowsEditing: true,
-				aspect: [4, 3],
-				quality: 0.65,
-			});
-			if (!result.cancelled) {
-				setProductImage(result);
-			}
-		} catch (E) {
-			Alert.alert('Something went wrong...');
-			console.log(E);
-		}
-	};
-  const fetchProducts = async () => { 
+    await getPermissionAsync();
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 0.65,
+      });
+      if (!result.cancelled) {
+        setProductImage(result);
+      }
+    } catch (E) {
+      Alert.alert('Something went wrong...');
+      console.log(E);
+    }
+  };
+  const fetchProducts = async () => {
     let res: any = await fetch_all_products();
-    console.log("res  => ", res.data); 
+    console.log("res  => ", res.data);
     dispatch({
       type: "ADD_PRODUCTS",
       payload: res.data,
-    }); 
+    });
   };
   useEffect(() => {
     //console.log("route.params ", route.params)
@@ -189,7 +189,7 @@ export default function ModalScreen({ route, navigation }) {
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
           paddingTop: 20,
-          paddingBottom: 400, 
+          paddingBottom: 400,
         }}
       >
         <View
@@ -213,7 +213,7 @@ export default function ModalScreen({ route, navigation }) {
             }}
           >
             <TouchableOpacity
-              onPress={()=>{
+              onPress={() => {
                 //_pickImage 
                 return
               }}
@@ -265,18 +265,44 @@ export default function ModalScreen({ route, navigation }) {
                 {products?.length || 0}
               </Text>
               <Text style={{ color: "#868686", fontSize: 13 }}>Products</Text>
-            </View> 
-              <TouchableOpacity
-                style={[
-                  tailwind`bg-[${theme.colors.lightbrown1}] w-[50%] p-3 rounded-md`,
-                ]}
-                onPress={()=>setPVisible(true)}
-              >
-                <Text style={[tailwind`text-white text-center`]}>
-                  Upload Product
-                </Text>
-              </TouchableOpacity> 
+            </View>
+            <TouchableOpacity
+              style={[
+                tailwind`bg-[${theme.colors.lightbrown1}] w-[50%] p-3 rounded-md`,
+              ]}
+              onPress={() => setPVisible(true)}
+            >
+              <Text style={[tailwind`text-white text-center`]}>
+                Upload Product
+              </Text>
+            </TouchableOpacity>
           </View>
+          <TouchableOpacity
+            style={[tailwind`w-[100%] justify-end p-4`]}
+            onPress={async () => {
+              try {
+                console.log("successfully signed out");
+                global.userID = null;
+                await SecureSave("signInData", "");
+                await SecureSave("FULL_BIO_DATA", "");
+                dispatch({
+                  type: "LOGGED_OUT_USER",
+                  payload: null,
+                });
+                dispatch({
+                  type: "USER_ID_NULL",
+                  payload: null,
+                });
+              } catch (err) {
+                Alert.alert("error signing out...", err);
+              }
+            }}
+          >
+            <Text style={[tailwind`text-red-400 font-bold`]}>Log Out</Text>
+          </TouchableOpacity>
+
+
+
           <View
             style={{
               width: SCREEN_WIDTH,
@@ -306,8 +332,8 @@ export default function ModalScreen({ route, navigation }) {
               products.map((item, i) => {
                 return (
                   <View style={{ position: "relative" }} key={item?.id}>
-                    <ProductCard 
-                      key={item?.id} 
+                    <ProductCard
+                      key={item?.id}
                       product={item}
                       width={0.4 * SCREEN_WIDTH}
                       height={0.3 * SCREEN_HEIGHT}
@@ -487,17 +513,17 @@ export default function ModalScreen({ route, navigation }) {
                 <TouchableOpacity
                   disabled={indicator}
                   onPress={async () => {
-                    setIndicator(true); 
+                    setIndicator(true);
                     // console.log("product passed ", product);
                     try {
                       let res = await createProduct(product);
                       if (res.msg == "SUCCESS") {
-                        setIndicator(false); 
+                        setIndicator(false);
                         setTimeout(function () {
                           Alert.alert("Success!");
                           fetchProducts();
-                          ptoggleOverlay(); 
-                         // onRefresh();
+                          ptoggleOverlay();
+                          // onRefresh();
                         }, 1000);
                       } else {
                         setIndicator(false);
@@ -512,12 +538,12 @@ export default function ModalScreen({ route, navigation }) {
                   style={[
                     tailwind`bg-[${theme.colors.lightbrown1}] w-full p-3 rounded-md my-3 mb-6`,
                   ]}
-                > 
-                    {indicator === true ? (
-                      <ActivityIndicator size="small" color="#fff" />
-                    ) : (
-                      <Text style={styles.buttonText}>Submit</Text>
-                    )} 
+                >
+                  {indicator === true ? (
+                    <ActivityIndicator size="small" color="#fff" />
+                  ) : (
+                    <Text style={styles.buttonText}>Submit</Text>
+                  )}
                 </TouchableOpacity>
               </View>
               {/* <KeyboardSpacer topSpacing={-150} /> */}
@@ -526,7 +552,7 @@ export default function ModalScreen({ route, navigation }) {
 							<KeyboardSpacer topSpacing={SCREEN_HEIGHT < 700 ? -0 : -200} />
 						)} */}
           </Overlay>
-          <View style={{ height: 500, paddingVertical:500 }}></View>
+          <View style={{ height: 500, paddingVertical: 500 }}></View>
         </View>
       </ScrollView>
       <View style={{ height: 300 }}></View>
